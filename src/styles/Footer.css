@@ -1,0 +1,124 @@
+:root {
+  --tf-footer-start: #2C3E50;
+  --tf-footer-end: #1A2838;
+  --tf-footer-bar: #2C3E50;
+}
+
+.tf-footer {
+  background: linear-gradient(180deg, var(--tf-footer-start), var(--tf-footer-end));
+  color: #ffffff;
+}
+
+.tf-footer__ctaArea {
+  padding: 56px 0 54px;
+}
+
+.tf-footer__inner {
+  width: min(980px, calc(100% - 64px));
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tf-footer__title {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(22px, 3.3vw, 34px);
+  font-weight: 900;
+  letter-spacing: -0.6px;
+  font-family: var(--tf-font-display, inherit);
+}
+
+.tf-footer__text {
+  margin: 10px auto 18px;
+  max-width: 640px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.tf-footer__cta {
+  margin-top: 6px;
+  padding: 12px 22px;
+  font-size: 14px;
+  gap: 10px;
+}
+
+.tf-footer .tf-btn--light {
+  background: #ffffff;
+  color: #1A2838;
+  border-color: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.25);
+}
+
+.tf-footer .tf-btn--light:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+.tf-footer .tf-btn--light:active {
+  transform: translateY(0px);
+}
+
+.tf-footer__bar {
+  background: var(--tf-footer-bar);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 14px 0;
+}
+
+.tf-footer__barInner {
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tf-footer__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.tf-footer__brandLogo {
+  width: 22px;
+  height: 22px;
+  display: block;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+.tf-footer__brandName {
+  font-weight: 900;
+  letter-spacing: -0.3px;
+  font-family: var(--tf-font-display, inherit);
+}
+
+.tf-footer__legal {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 11px;
+  text-align: right;
+}
+
+@media (max-width: 700px) {
+  .tf-footer__barInner {
+    flex-direction: column;
+  }
+
+  .tf-footer__legal {
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .tf-footer__inner,
+  .tf-footer__barInner {
+    width: min(1080px, calc(100% - 32px));
+  }
+
+  .tf-footer__ctaArea {
+    padding: 46px 0 44px;
+  }
+}
