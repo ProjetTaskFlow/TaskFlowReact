@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import '../styles/Header.css'
-import logo from '../assets/taskflow-logo.svg'
+import logo from '../assets/taskflow-logo.png'
 
 function Header() {
   return (
@@ -8,7 +8,6 @@ function Header() {
       <div className="tf-header__inner">
         <Link to="/" className="tf-brand" aria-label="TaskFlow - Accueil">
           <img className="tf-brand__logo" src={logo} alt="Logo TaskFlow" />
-          <span className="tf-brand__name">TaskFlow</span>
         </Link>
 
         <div className="tf-header__actions">
