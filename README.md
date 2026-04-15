@@ -1,20 +1,91 @@
-<<<<<<< HEAD
-# TaskFlowReact
-=======
-# React + Vite
+# TaskFlow Front-end
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interface React de l'application de gestion de projet qui se nomme TaskFlow, communiquant avec l'API REST.
 
-Currently, two official plugins are available:
+## Prérequis
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Node.js v18+
+- npm
+- Une API back-end fonctionnelle
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Installation
 
-## Expanding the ESLint configuration
+```bash
+npm install
+cp .env.example .env
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
->>>>>>> 5d68937 (1er commit)
+## Quickstart
+
+```bash
+# 1. Cloner le depot
+git clone https://github.com/ProjetTaskFlow/TaskFlowReact
+cd taskflow
+
+# 2. Installer les dependances
+npm install
+
+# 3. Configurer l'environnement
+cp .env.example .env
+# Editer .env et renseigner les variables necessaires
+
+# 4. Lancer le serveur de developpement
+npm run dev
+```
+
+L'application sera accessible sur `http://localhost:5173`.
+
+## Variables d'environnement
+
+VITE_API_URL=http://localhost:3000
+
+## Scripts disponibles
+
+| Commande          | Description                        |
+| ----------------- | ---------------------------------- |
+| `npm run dev`     | Lancer le serveur de developpement |
+| `npm run build`   | Construire le projet pour la prod  |
+| `npm run preview` | Previsualiser le build de prod     |
+| `npm run lint`    | Lancer ESLint sur le projet        |
+
+## Exemples d'utilisation
+
+| URL                           | Description      |
+|-------------------------------|------------------|
+| `http://localhost:5173/`      | Page d'accueil   |
+| `http://localhost:5173/login` | Formulaire de connexion |
+| `http://localhost:5173/dashboard` | Tableau de bord  |
+
+
+## Structure
+
+
+```
+src/
+├── components/            
+│   └── Footer.jsx
+│   └── Navbar.jsx
+│   └── Dashboard.jsx
+├── context/        
+│   └── AuthContext.jsx
+├── pages/            
+│   └── Project.jsx
+│   └── Kanban.jsx
+│   └── Home.jsx
+│   └── Login.jsx
+│   └── Settings.jsx
+│   └── Register.jsx
+├── styles/
+│   └── index.css
+├── App.jsx            
+└── main.jsx           
+```
+
+## Stack technique
+
+- **React**
+- **Vite**
+- **react-dom**
+- **react-router-dom**
