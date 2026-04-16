@@ -6,10 +6,14 @@ function Header() {
   return (
     <header className="tf-header">
       <div className="tf-header__inner">
+
+        {/* LEFT */}
         <Link to="/" className="tf-brand" aria-label="TaskFlow - Accueil">
           <img className="tf-brand__logo" src={logo} alt="Logo TaskFlow" />
         </Link>
 
+
+        {/* RIGHT */}
         <div className="tf-header__actions">
           <Link to="/login" className="tf-btn tf-btn--outline">
             Connexion
@@ -18,6 +22,7 @@ function Header() {
             Commencer
           </Link>
         </div>
+
       </div>
     </header>
   )
