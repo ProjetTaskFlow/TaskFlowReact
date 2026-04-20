@@ -1,6 +1,6 @@
 function Kanban() {
-    return(
-        <div> Kanban </div>
-    )
+  return (
+    <div> Kanban </div>
+  );
 }
-export default Kanban
+export default Kanban;
