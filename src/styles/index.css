@@ -1,0 +1,255 @@
+/* outfit-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/outfit-v15-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+.auth-wrapper {
+    font-family: Outfit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 16px;
+    background: #f0f2f5;
+}
+
+.auth-container {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    padding: 40px 36px 32px;
+    width: 100%;
+    max-width: 440px;
+}
+
+.auth-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.auth-logo img {
+    width: 36px;
+    height: 36px;
+}
+
+.auth-logo-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a1a2e;
+}
+
+.auth-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.auth-subtitle {
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-group label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper .input-icon {
+    position: absolute;
+    left: 12px;
+    width: 16px;
+    height: 16px;
+    color: #9ca3af;
+    pointer-events: none;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 10px 12px 10px 36px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: #1a1a2e;
+    background: #fff;
+    transition: border-color 0.2s;
+    outline: none;
+}
+
+.input-wrapper input:focus {
+    border-color: #0ea5e9;
+}
+
+.input-wrapper input::placeholder {
+    color: #9ca3af;
+}
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper .input-icon {
+    position: absolute;
+    left: 12px;
+    width: 16px;
+    height: 16px;
+    color: #9ca3af;
+    pointer-events: none;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding: 10px 40px 10px 36px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: #1a1a2e;
+    background: #fff;
+    transition: border-color 0.2s;
+    outline: none;
+}
+
+.password-wrapper input:focus {
+    border-color: #0ea5e9;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9ca3af;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-password:hover {
+    color: #6b7280;
+}
+
+.password-hint {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+.terms-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.terms-group input[type="checkbox"] {
+    margin-top: 2px;
+    accent-color: #0ea5e9;
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.terms-group span {
+    font-size: 0.8125rem;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+.terms-group a {
+    color: #0ea5e9;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.terms-group a:hover {
+    text-decoration: underline;
+}
+
+.error-message-box {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.8125rem;
+    color: #dc2626;
+}
+
+.auth-submit {
+    background: #0ea5e9;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.auth-submit:hover {
+    background: #0284c7;
+}
+
+.auth-submit:active {
+    transform: scale(0.98);
+}
+
+.register-link {
+    text-align: center;
+    font-size: 0.8125rem;
+    color: #6b7280;
+    margin-top: 16px;
+}
+
+.register-link a {
+    color: #0ea5e9;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
