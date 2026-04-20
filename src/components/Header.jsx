@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
-import '../styles/Header.css'
-import logo from '../assets/taskflow-logo.png'
+import { Link } from 'react-router-dom';
+import '../styles/Header.css';
+import logo from '../assets/taskflow-logo.png';
 
 function Header() {
   return (
@@ -11,7 +11,6 @@ function Header() {
         <Link to="/" className="tf-brand" aria-label="TaskFlow - Accueil">
           <img className="tf-brand__logo" src={logo} alt="Logo TaskFlow" />
         </Link>
-
 
         {/* RIGHT */}
         <div className="tf-header__actions">
@@ -25,7 +24,7 @@ function Header() {
 
       </div>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;

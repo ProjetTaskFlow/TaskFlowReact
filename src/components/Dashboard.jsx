@@ -1,5 +1,5 @@
-import "../styles/Dashboard.css";
-import { useNavigate } from "react-router-dom";
+import '../styles/Dashboard.css';
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -11,30 +11,30 @@ function Dashboard() {
       <div className="sidebar">
         <h2>TaskFlow</h2>
 
-        <button 
-        className="menu active"
+        <button
+          className="menu active"
         >
           𝄜 Dashboard
         </button>
 
         <button
           className="menu"
-          onClick={() => navigate("/projects")}
+          onClick={() => navigate('/projects')}
         >
           🗁 Projets
         </button>
 
-        <button 
-        className="menu"
+        <button
+          className="menu"
         >
-        🛠 Paramètres
+          🛠 Paramètres
         </button>
 
-        <button 
-           className="menu-logout"
-           onClick={() => navigate("/login")}
+        <button
+          className="menu-logout"
+          onClick={() => navigate('/login')}
         >
-            Déconnexion ➜]
+          Déconnexion ➜]
         </button>
       </div>
 
@@ -66,7 +66,6 @@ function Dashboard() {
             </div>
           </div>
         </div>
-
 
       </div>
     </div>
