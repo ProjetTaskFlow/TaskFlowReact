@@ -30,7 +30,7 @@ body {
   flex-direction: column;
   padding: 24px 16px;
   position: fixed;
-  top: 0;
+  top: 100px;
   left: 0;
   bottom: 0;
 }
