@@ -113,5 +113,8 @@ function Home() {
     </main>
   );
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/main
 export default Home;
