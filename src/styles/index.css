@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /* outfit-regular - latin */
 @font-face {
     font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
@@ -254,7 +254,7 @@
 .register-link a:hover {
     text-decoration: underline;
 }
-=======
+
 *,
 *::before,
 *::after {
@@ -286,4 +286,4 @@ h5,
 h6 {
   font-family: var(--tf-font-display);
 }
->>>>>>> origin/main
+
