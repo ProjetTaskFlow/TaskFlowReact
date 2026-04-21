@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -267,11 +267,4 @@ const Register = () => {
 };
 
 export default Register;
-=======
-function Register() {
-  return (
-    <div> Register </div>
-  );
-}
-export default Register;
->>>>>>> origin/main
+
