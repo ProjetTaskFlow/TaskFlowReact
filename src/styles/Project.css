@@ -48,7 +48,7 @@
     box-shadow: 0 16px 35px rgba(0, 191, 255, 0.45);
 }
 
-/* shine /
+
 .btn-primary::after {
   content: "";
   position: absolute;
@@ -145,7 +145,7 @@
   transform: translateY(-3px);
 }
 
-/ PLUS ICON */
+
 .empty-card .plus {
     font-size: 28px;
     margin-bottom: 10px;
