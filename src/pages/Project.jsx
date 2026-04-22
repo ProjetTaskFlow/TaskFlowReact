@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Kanban from "../components/Kanban";
 import "../styles/Project.css";
 
 function Project() {
@@ -148,6 +149,11 @@ function Project() {
         )}
       </div>
   );
+}
+
+export default function ProjetDetail() {
+  const idProjet = 1; // récupère l'id depuis les params de route
+  return <Kanban idProjet={idProjet} />;
 }
 
 export default Project;

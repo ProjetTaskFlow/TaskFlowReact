@@ -5,7 +5,7 @@ import Register from './pages/Register.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import Header from './components/Header.jsx';
 import Project from './pages/Project.jsx';
-import Kanban from './pages/Kanban.jsx';
+import Kanban from './components/Kanban.jsx';
 
 function App() {
     return (
