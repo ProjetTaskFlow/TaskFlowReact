@@ -8,18 +8,20 @@ import Project from './pages/Project.jsx';
 import Kanban from './pages/Kanban.jsx';
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/project" element={<Project />} />
-        <Route path="/kanban" element={<Kanban />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    return (
+
+        <BrowserRouter>
+            <Header/>
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/register" element={<Register/>}/>
+                <Route path="/dashboard" element={<Dashboard/>}/>
+                <Route path="/project" element={<Project/>}/>
+                <Route path="/kanban" element={<Kanban/>}/>
+            </Routes>
+        </BrowserRouter>
+    );
 }
 export default App;
+
