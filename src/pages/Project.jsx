@@ -151,7 +151,7 @@ function Project() {
   );
 }
 
-export default function ProjetDetail() {
+export function ProjectDetail() {
   const idProjet = 1; // récupère l'id depuis les params de route
   return <Kanban idProjet={idProjet} />;
 }
