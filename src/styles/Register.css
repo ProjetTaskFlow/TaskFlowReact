@@ -173,6 +173,29 @@
     line-height: 1.4;
 }
 
+.password-rules {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.password-rule {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 999px;
+}
+
+.password-rule.valid {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.password-rule.invalid {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
 .terms-group {
     display: flex;
     align-items: flex-start;

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import '../styles/Register.css';
 
-
 const EyeIcon = () => (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
@@ -45,17 +44,21 @@ const ArrowRight = () => (
     </svg>
 );
 
+const PASSWORD_RULES = [
+    { test: (p) => p.length >= 12, label: "12 caractères minimum" },
+    { test: (p) => /[a-z]/.test(p), label: "Une minuscule" },
+    { test: (p) => /[A-Z]/.test(p), label: "Une majuscule" },
+    { test: (p) => /[0-9]/.test(p), label: "Un chiffre" },
+];
+
 const Register = () => {
     const navigate = useNavigate();
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+    useEffect(() => { window.scrollTo(0, 0); }, []);
 
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
-    const [passwordErrors, setPasswordErrors] = useState([]);
 
     const [formData, setFormData] = useState({
         prenom: "",
@@ -66,30 +69,19 @@ const Register = () => {
         acceptTerms: false,
     });
 
-    const validatePassword = (password) => {
-        const errors = [];
-        if (password.length < 12) errors.push("Le mot de passe doit contenir au minimum 12 caractères");
-        if (!/[a-z]/.test(password)) errors.push("Le mot de passe doit contenir au moins une minuscule");
-        if (!/[A-Z]/.test(password)) errors.push("Le mot de passe doit contenir au moins une majuscule");
-        if (!/[0-9]/.test(password)) errors.push("Le mot de passe doit contenir au moins un chiffre");
-        return errors;
-    };
-
     const handleChange = (e) => {
         const { id, value, type, checked } = e.target;
         setFormData((prev) => ({ ...prev, [id]: type === "checkbox" ? checked : value }));
-        if (id === "password") {
-            setPasswordErrors(value ? validatePassword(value) : []);
-        }
+        if (errorMsg) setErrorMsg("");
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrorMsg("");
 
-        const passwordValidationErrors = validatePassword(formData.password);
-        if (passwordValidationErrors.length > 0) {
-            setErrorMsg(passwordValidationErrors[0]);
+        const failedRules = PASSWORD_RULES.filter(r => !r.test(formData.password));
+        if (failedRules.length > 0) {
+            setErrorMsg(failedRules.map(r => r.label).join(", "));
             return;
         }
         if (formData.password !== formData.confirmPassword) {
@@ -125,6 +117,8 @@ const Register = () => {
         }
     };
 
+    const password = formData.password;
+
     return (
         <main className="auth-wrapper">
             <div className="auth-container">
@@ -142,28 +136,14 @@ const Register = () => {
                             <label htmlFor="prenom">Prénom</label>
                             <div className="input-wrapper">
                                 <UserIcon />
-                                <input
-                                    type="text"
-                                    id="prenom"
-                                    placeholder="Jean"
-                                    value={formData.prenom}
-                                    onChange={handleChange}
-                                    required
-                                />
+                                <input type="text" id="prenom" placeholder="Jean" value={formData.prenom} onChange={handleChange} required />
                             </div>
                         </div>
                         <div className="input-group">
                             <label htmlFor="nom">Nom</label>
                             <div className="input-wrapper">
                                 <UserIcon />
-                                <input
-                                    type="text"
-                                    id="nom"
-                                    placeholder="Dupont"
-                                    value={formData.nom}
-                                    onChange={handleChange}
-                                    required
-                                />
+                                <input type="text" id="nom" placeholder="Dupont" value={formData.nom} onChange={handleChange} required />
                             </div>
                         </div>
                     </div>
@@ -172,14 +152,7 @@ const Register = () => {
                         <label htmlFor="email">Email</label>
                         <div className="input-wrapper">
                             <MailIcon />
-                            <input
-                                type="email"
-                                id="email"
-                                placeholder="jean.dupont@example.com"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                            />
+                            <input type="email" id="email" placeholder="jean.dupont@example.com" value={formData.email} onChange={handleChange} required />
                         </div>
                     </div>
 
@@ -195,24 +168,21 @@ const Register = () => {
                                 onChange={handleChange}
                                 required
                             />
-                            <button
-                                type="button"
-                                className="toggle-password"
-                                onClick={() => setShowPassword(!showPassword)}
-                            >
+                            <button type="button" className="toggle-password" onClick={() => setShowPassword(!showPassword)}>
                                 {showPassword ? <EyeOffIcon /> : <EyeIcon />}
                             </button>
                         </div>
-                        {passwordErrors.length > 0 && (
-                            <div className="password-errors">
-                                {passwordErrors.map((error, index) => (
-                                    <div key={index} className="password-error">{error}</div>
+
+                        {/* Indicateurs de règles en temps réel */}
+                        {password && (
+                            <div className="password-rules">
+                                {PASSWORD_RULES.map((rule, i) => (
+                                    <span key={i} className={`password-rule ${rule.test(password) ? "valid" : "invalid"}`}>
+                                        {rule.test(password) ? "✓" : "✗"} {rule.label}
+                                    </span>
                                 ))}
                             </div>
                         )}
-                        <p className="password-hint">
-                            12 caractères min., une majuscule, une minuscule et un chiffre
-                        </p>
                     </div>
 
                     <div className="input-group">
@@ -227,24 +197,14 @@ const Register = () => {
                                 onChange={handleChange}
                                 required
                             />
-                            <button
-                                type="button"
-                                className="toggle-password"
-                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                            >
+                            <button type="button" className="toggle-password" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
                                 {showConfirmPassword ? <EyeOffIcon /> : <EyeIcon />}
                             </button>
                         </div>
                     </div>
 
                     <div className="terms-group">
-                        <input
-                            type="checkbox"
-                            id="acceptTerms"
-                            checked={formData.acceptTerms}
-                            onChange={handleChange}
-                            required
-                        />
+                        <input type="checkbox" id="acceptTerms" checked={formData.acceptTerms} onChange={handleChange} required />
                         <span>
                             Veuillez accepter nos{" "}
                             <Link to="/mentions-legales#donnees">conditions générales d'utilisation</Link>
@@ -267,4 +227,3 @@ const Register = () => {
 };
 
 export default Register;
-
