@@ -1,48 +1,34 @@
-import '../styles/Dashboard.css';
-import { useNavigate } from 'react-router-dom';
+import "../styles/Dashboard.css";
+import { useNavigate } from "react-router-dom";
+import NotificationBell from "../components/NotificationBell";
 
 function Dashboard() {
   const navigate = useNavigate();
 
   return (
     <div className="container">
-
-      {/* Sidebar */}
       <div className="sidebar">
         <h2>TaskFlow</h2>
 
-        <button
-          className="menu active"
-        >
-          𝄜 Dashboard
-        </button>
+        <button className="menu active">𝄜 Dashboard</button>
 
-        <button
-          className="menu"
-          onClick={() => navigate('/projects')}
-        >
+        <button className="menu" onClick={() => navigate("/projects")}>
           🗁 Projets
         </button>
 
-        <button
-          className="menu"
-        >
-          🛠 Paramètres
-        </button>
+        <button className="menu">🛠 Paramètres</button>
 
-        <button
-          className="menu-logout"
-          onClick={() => navigate('/login')}
-        >
+        <button className="menu-logout" onClick={() => navigate("/login")}>
           Déconnexion ➜]
         </button>
       </div>
 
-      {/* CONTENT */}
       <div className="content">
-
         <div className="main">
-          <h1>Dashboard</h1>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
+            <h1 style={{ margin: 0 }}>Dashboard</h1>
+            <NotificationBell />
+          </div>
 
           <div className="cards">
             <div className="card">
@@ -66,10 +52,10 @@ function Dashboard() {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
 }
 
 export default Dashboard;
+

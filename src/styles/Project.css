@@ -222,3 +222,17 @@
     margin-top: 0.5rem;
     padding: 10px;
 }
+
+.sidebar {
+  width: 220px;
+  height: 800px;
+  background: #fff;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.16);
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+}

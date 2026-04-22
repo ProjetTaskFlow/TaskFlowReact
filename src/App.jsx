@@ -2,10 +2,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
-import Dashboard from './components/Dashboard.jsx';
+import Dashboard from './pages/Dashboard.jsx';
 import Header from './components/Header.jsx';
 import Project from './pages/Project.jsx';
 import Kanban from './pages/Kanban.jsx';
+import KanbanDemo from './pages/KanbanDemo.jsx';
+import Settings from './pages/Settings.jsx';
 
 function App() {
   return (
@@ -17,7 +19,11 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/project" element={<Project />} />
+        <Route path="/projects" element={<Project />} />
+        <Route path="/project/:slug/:id" element={<Project />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="/kanban" element={<Kanban />} />
+        <Route path="/kanbanDemo" element={<KanbanDemo />} />
       </Routes>
     </BrowserRouter>
   );
