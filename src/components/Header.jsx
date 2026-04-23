@@ -18,7 +18,7 @@ function Header() {
             Connexion
           </Link>
           <Link to="/register" className="tf-btn tf-btn--primary">
-            Commencer
+            Inscription
           </Link>
         </div>
 
