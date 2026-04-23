@@ -1,5 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import "../styles/Kanban.css";
 
 const STATUS = [
@@ -20,6 +22,7 @@ function Kanban() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState(null);
   const [editingTask, setEditingTask] = useState(null);
+  const [exporting,    setExporting]    = useState(false);
   const [form, setForm] = useState({
     nom_tache: "",
     description: "",
@@ -29,6 +32,10 @@ function Kanban() {
     temps_reel: "",
     Id_utilisateur: "",
   });
+
+  // boardRef pointe vers le <div class="kb_board"> dans le JSX
+  // html2canvas en a besoin pour capturer uniquement les colonnes (sans header ni modal)
+  const boardRef = useRef(null);
 
   const API = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -162,9 +169,88 @@ function Kanban() {
     setDraggedId(null);
   };
 
+  // Export PDF (capture du tableau kanban en image et puis génération du pdf)
+  const handleExportPDF = async () => {
+    if (!boardRef.current) return; // Sécurité si la ref n'existe pas
+    setExporting(true);
+
+    try {
+      // Capture HTML --> Image
+      const canvas = await html2canvas(boardRef.current, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#F4F7FA",
+        logging: false,
+      });
+
+      // Canvas --> Image PNG
+      // toDataURL retourne une chaîne base64 représentant l'image PNG
+      const imgData = canvas.toDataURL("image/png");
+
+      // Calcul des dimensions (Format A4 : 297mm x 210mm)
+      const pdfWidth = 297;
+      const pdfHeight = 210;
+      const margin = 10;
+
+      // Calcul de la hauteur proportionnelle pour ne pas déformer l'image
+      const ratio = canvas.width / canvas.height;
+      const contentWidth = pdfWidth - margin * 2;
+      const contentHeight = contentWidth / ratio;
+
+      // Création du PDF
+      // "l" = landscape (paysage), "mm" = millimètre, "a4" = format
+      const pdf = new jsPDF("l", "mm", "a4");
+
+      // En-tête du PDF
+      pdf.setTextColor(44, 62, 80);       // Couleur navy
+      pdf.setFontSize(18);
+      pdf.setFont("helvetica", "bold");
+      pdf.text("Tableau Kanban", margin, 18);
+
+      pdf.setFontSize(10);
+      pdf.setFont("helvetica", "normal");
+      pdf.setTextColor(107, 124, 147);    // Gris-bleu
+      const dateExport = new Date().toLocaleDateString("fr-FR", {
+        day: "2-digit", month: "long", year: "numeric",
+        hour: "2-digit", minute: "2-digit",
+      });
+      pdf.text(`Exporté le ${dateExport}`, margin, 26);
+
+      // Ligne de séparation
+      pdf.setDrawColor(220, 230, 240);
+      pdf.setLineWidth(0.3);
+      pdf.line(margin, 30, pdfWidth - margin, 30);
+
+      // Ajout de l'image du Kanban
+      // addImage(data, format, x, y, largeur, hauteur)
+      pdf.addImage(imgData, "PNG", margin, 33, contentWidth, contentHeight);
+
+      // Pied de page
+      pdf.setFontSize(8);
+      pdf.setTextColor(107, 124, 147);
+      pdf.text(
+          "TaskFlow — Gestion de projets et tâches",
+          pdfWidth / 2,
+          pdfHeight - 5,
+          { align: "center" }
+      );
+
+      // Téléchargement
+      // Le nom du fichier inclut la date du jour : ex "kanban-2026-04-22.pdf"
+      pdf.save(`kanban-${new Date().toISOString().slice(0, 10)}.pdf`);
+    } catch (err) {
+      console.error("Erreur export PDF :", err);
+      alert("Erreur lors de la génération du PDF");
+    } finally {
+      setExporting(false); // Réactive le bouton dans tous les cas
+    }
+  };
+
+  // Rendu conditionnel
   if (loading) return <div className="kb-loading"><div className="kb-spinner" /></div>;
   if (error) return <div className="kb-error">Erreur : {error}</div>;
 
+  // Rendu principal
   return (
       <div className="kb-page">
 
@@ -175,7 +261,26 @@ function Kanban() {
             <h1 className="kb-title">Tableau Kanban</h1>
             <p className="kb-subtitle">Glissez-déposez les tâches pour changer leur statut</p>
           </div>
-          <button className="kb-btn-new" onClick={openCreate}>+ Nouvelle tâche</button>
+
+          <div className="kb-header-actions">
+            {/* Bouton Export PDF */}
+            <button
+                className="kb-btn-export"
+                onClick={handleExportPDF}
+                disabled={exporting}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" strokeWidth="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              {exporting ? "Génération..." : "Exporter PDF"}
+            </button>
+
+            {/* Bouton Nouvelle tâche */}
+            <button className="kb-btn-new" onClick={openCreate}>+ Nouvelle tâche</button>
+          </div>
         </div>
 
         {/* BOARD */}
