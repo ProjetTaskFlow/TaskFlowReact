@@ -98,7 +98,7 @@ function Project() {
                       <div
                           key={project.Id_projet}
                           className="project-card"
-                          onClick={() => navigate(`/project/${project.titre.toLowerCase().replace(/\s+/g, '-')}/${project.Id_projet}`)}
+                          onClick={() => navigate(`/projects/${project.Id_projet}/board`)}
                           style={{ cursor: "pointer" }}
                       >
                         <div className="card-header">

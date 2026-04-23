@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import '../styles/Dashboard.css';
 
+import NotificationBell from './NotificationBell';
+
 function Dashboard() {
   const navigate = useNavigate();
   const { logout } = useAuth();
@@ -110,6 +112,7 @@ function Dashboard() {
               <input type="text" placeholder="Rechercher..." />
             </div>
             <div className="db-user">
+              <NotificationBell />
               <div className="db-user-info">
                 <span className="db-user-name">Marie Dupont</span>
                 <span className="db-user-role">Utilisateur</span>
