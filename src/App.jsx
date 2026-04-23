@@ -7,6 +7,8 @@ import Dashboard from './components/Dashboard.jsx';
 import Header from './components/Header.jsx';
 import Project from './pages/Project.jsx';
 import Kanban from './components/Kanban.jsx';
+import Settings from './pages/Settings.jsx';
+import KanbanDemo from './pages/KanbanDemo.jsx';
 
 function App() {
     return (
@@ -18,6 +20,8 @@ function App() {
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/dashboard" element={<Dashboard/>}/>
                     <Route path="/projects" element={<Project/>}/>
+                    <Route path="/settings" element={<Settings />}/>
+                    <Route path="/demokanban" element={<KanbanDemo/>}/>
                     <Route path="/projects/:id/board" element={<Kanban/>}/>
                 </Routes>
             </BrowserRouter>

@@ -38,7 +38,7 @@ function Login() {
       }
 
       // Connexion réussie donc appel login() du AuthContext avec token reçu de l'API
-      login(data.utilisateur);
+      login(data.token, data.utilisateur);
 
       // Redirection vers dashboard
       navigate("/dashboard");

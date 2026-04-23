@@ -55,7 +55,7 @@ function Project() {
             🗁 Projets
           </button>
 
-          <button className="menu">
+          <button className="menu" onClick={() => navigate('/settings')}>
             🛠 Paramètres
           </button>
 

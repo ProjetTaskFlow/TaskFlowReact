@@ -90,7 +90,7 @@ function Dashboard() {
               <span className="db-nav-icon">▦</span> Projets
               <span className="db-nav-dot" />
             </button>
-            <button className="db-nav-item">
+            <button className="db-nav-item" onClick={() => navigate('/settings')}>
               <span className="db-nav-icon">⚙</span> Paramètres
             </button>
           </nav>
