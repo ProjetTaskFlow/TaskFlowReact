@@ -123,7 +123,7 @@ const Register = () => {
         <main className="auth-wrapper">
             <div className="auth-container">
                 <div className="auth-logo">
-                    <img src="/logo.svg" alt="TaskFlow" />
+                    <img src="taskflow-logo.png" alt="TaskFlow" />
                     <span className="auth-logo-name">TaskFlow</span>
                 </div>
 
