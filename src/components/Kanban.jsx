@@ -171,7 +171,7 @@ function Kanban() {
         {/* HEADER */}
         <div className="kb-header">
           <div>
-            <button className="kb-back" onClick={() => navigate('/dashboard')}>← Retour aux projets</button>
+            <button className="kb-back" onClick={() => navigate('/projects')}>← Retour aux projets</button>
             <h1 className="kb-title">Tableau Kanban</h1>
             <p className="kb-subtitle">Glissez-déposez les tâches pour changer leur statut</p>
           </div>

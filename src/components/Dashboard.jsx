@@ -55,7 +55,7 @@ function Dashboard() {
         },
         body: JSON.stringify({
           ...formData,
-          Id_utilisateur: 1, // à remplacer par l'ID du user connecté depuis le token
+          Id_utilisateur: user?.id || 1,
         }),
       });
       const data = await response.json();
@@ -74,46 +74,31 @@ function Dashboard() {
   return (
       <div className="db-container">
 
-            {/* Sidebar */}
-       <div className="sidebar">
-        <h2>TaskFlow</h2>
+        {/* SIDEBAR */}
+        <div className="db-sidebar">
+          <div className="db-logo">
+            <div className="db-logo-icon">✦</div>
+            <span>TaskFlow</span>
+          </div>
 
-        <button 
-        className="menu active"
-        <button
-          className="menu active"
-        >
-          𝄜 Dashboard
-        </button>
+          <nav className="db-nav">
+            <button className="db-nav-item active" onClick={() => navigate('/dashboard')}>
+              <span className="db-nav-icon">⊞</span> Dashboard
+              <span className="db-nav-dot" />
+            </button>
+            <button className="db-nav-item" onClick={() => navigate('/projects')}>
+              <span className="db-nav-icon">▦</span> Projets
+              <span className="db-nav-dot" />
+            </button>
+            <button className="db-nav-item">
+              <span className="db-nav-icon">⚙</span> Paramètres
+            </button>
+          </nav>
 
-        <button
-          className="menu"
-          onClick={() => navigate("/projects")}
-          onClick={() => navigate('/projects')}
-        >
-          🗁 Projets
-        </button>
-
-        <button 
-        className="menu"
-        <button
-          className="menu"
-        >
-        🛠 Paramètres
-          🛠 Paramètres
-        </button>
-
-        <button 
-           className="menu-logout"
-           onClick={() => navigate("/login")}
-        <button
-          className="menu-logout"
-          onClick={() => navigate('/login')}
-        >
-            Déconnexion ➜]
-          Déconnexion ➜]
-        </button>
-      </div>
+          <button className="db-logout" onClick={handleLogout}>
+            <span>↪</span> Déconnexion
+          </button>
+        </div>
 
         {/* MAIN */}
         <div className="db-main">
@@ -127,9 +112,9 @@ function Dashboard() {
             <div className="db-user">
               <div className="db-user-info">
                 <span className="db-user-name">{user?.prenom} {user?.nom}</span>
-                <div className="db-avatar">{user?.prenom?.[0]}{user?.nom?.[0]}</div>
+                <span className="db-user-role">Utilisateur</span>
               </div>
-              <div className="db-avatar">MD</div>
+              <div className="db-avatar">{user?.prenom?.[0]}{user?.nom?.[0]}</div>
             </div>
           </div>
 
@@ -217,7 +202,6 @@ function Dashboard() {
                       </div>
                   ))}
 
-                  {/* Card créer */}
                   <div className="db-project-card db-project-create" onClick={() => setShowModal(true)}>
                     <div className="db-create-icon">+</div>
                     <p className="db-create-title">Créer un nouveau projet</p>
