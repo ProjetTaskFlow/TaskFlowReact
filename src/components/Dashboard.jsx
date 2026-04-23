@@ -5,7 +5,7 @@ import '../styles/Dashboard.css';
 
 function Dashboard() {
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const [projets, setProjets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -126,8 +126,8 @@ function Dashboard() {
             </div>
             <div className="db-user">
               <div className="db-user-info">
-                <span className="db-user-name">Marie Dupont</span>
-                <span className="db-user-role">Utilisateur</span>
+                <span className="db-user-name">{user?.prenom} {user?.nom}</span>
+                <div className="db-avatar">{user?.prenom?.[0]}{user?.nom?.[0]}</div>
               </div>
               <div className="db-avatar">MD</div>
             </div>
