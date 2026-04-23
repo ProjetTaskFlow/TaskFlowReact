@@ -5,7 +5,7 @@ import '../styles/Dashboard.css';
 
 function Dashboard() {
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const [projets, setProjets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -55,7 +55,7 @@ function Dashboard() {
         },
         body: JSON.stringify({
           ...formData,
-          Id_utilisateur: 1, // à remplacer par l'ID du user connecté depuis le token
+          Id_utilisateur: user?.id || 1,
         }),
       });
       const data = await response.json();
@@ -111,10 +111,10 @@ function Dashboard() {
             </div>
             <div className="db-user">
               <div className="db-user-info">
-                <span className="db-user-name">Marie Dupont</span>
+                <span className="db-user-name">{user?.prenom} {user?.nom}</span>
                 <span className="db-user-role">Utilisateur</span>
               </div>
-              <div className="db-avatar">MD</div>
+              <div className="db-avatar">{user?.prenom?.[0]}{user?.nom?.[0]}</div>
             </div>
           </div>
 
@@ -202,7 +202,6 @@ function Dashboard() {
                       </div>
                   ))}
 
-                  {/* Card créer */}
                   <div className="db-project-card db-project-create" onClick={() => setShowModal(true)}>
                     <div className="db-create-icon">+</div>
                     <p className="db-create-title">Créer un nouveau projet</p>

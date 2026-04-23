@@ -1,41 +1,39 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Kanban from "../components/Kanban";
 import "../styles/Project.css";
 
 function Project() {
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [newProject, setNewProject] = useState({ title: "", description: "" });
+  const [newProject, setNewProject] = useState({ titre: "", description: "" });
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/projets")
+    fetch(`${import.meta.env.VITE_API_URL}/api/projets`)
         .then((res) => res.json())
         .then((data) => setProjects(data.projets))
         .catch((err) => console.error("Erreur chargement projets", err));
   }, []);
 
-  const handleCreateProject = () => {
-    setShowModal(true);
-  };
-
   const handleSubmit = async () => {
-    if (!newProject.title.trim()) return;
+    if (!newProject.titre.trim()) return;
 
     try {
-      const res = await fetch("http://localhost:3000/api/projets", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/projets`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          title: newProject.title,
+          titre: newProject.titre,
           description: newProject.description,
+          Id_utilisateur: 1,
         }),
       });
 
       const data = await res.json();
-      setProjects([...projects, data.projet]);
-      setNewProject({ title: "", description: "" });
+      if (data.projet) {
+        setProjects([...projects, data.projet]);
+      }
+      setNewProject({ titre: "", description: "" });
       setShowModal(false);
     } catch (err) {
       console.error("Erreur création projet", err);
@@ -44,51 +42,39 @@ function Project() {
 
   return (
       <div className="projects-container">
-        {/* Sidebar */}
+
+        {/* SIDEBAR */}
         <div className="sidebar">
           <h2>TaskFlow</h2>
 
-          <button
-              className="menu active"
-          >
+          <button className="menu" onClick={() => navigate('/dashboard')}>
             𝄜 Dashboard
           </button>
 
-          <button
-              className="menu"
-              onClick={() => navigate('/projects')}
-          >
+          <button className="menu active" onClick={() => navigate('/projects')}>
             🗁 Projets
           </button>
 
-          <button
-              className="menu"
-          >
+          <button className="menu">
             🛠 Paramètres
           </button>
 
-          <button
-              className="menu-logout"
-              onClick={() => navigate('/login')}
-          >
+          <button className="menu-logout" onClick={() => { localStorage.removeItem("token"); navigate('/login'); }}>
             Déconnexion ➜]
           </button>
         </div>
 
         <div className="project-container-2">
-
-
-
           <div className="projects-header">
             <h2>Tous les projets</h2>
-            <button className="btn-primary" onClick={handleCreateProject}>
+            <button className="btn-primary" onClick={() => setShowModal(true)}>
               + Nouveau projet
             </button>
           </div>
 
           <div className="projects-grid">
             {projects.length === 0 ? (
-                <div className="empty-card" onClick={handleCreateProject}>
+                <div className="empty-card" onClick={() => setShowModal(true)}>
                   <div className="plus">+</div>
                   <p>Créer un nouveau projet</p>
                   <span>Commencez à organiser vos tâches</span>
@@ -99,7 +85,7 @@ function Project() {
                       <div
                           key={project.Id_projet}
                           className="project-card"
-                          onClick={() => navigate(`/project/${project.titre.toLowerCase().replace(/\s+/g, '-')}/${project.Id_projet}`)}
+                          onClick={() => navigate(`/projects/${project.Id_projet}/board`)}
                           style={{ cursor: "pointer" }}
                       >
                         <div className="card-header">
@@ -116,10 +102,16 @@ function Project() {
                         </div>
                       </div>
                   ))}
+                  <div className="empty-card" onClick={() => setShowModal(true)}>
+                    <div className="plus">+</div>
+                    <p>Créer un nouveau projet</p>
+                    <span>Commencez à organiser vos tâches</span>
+                  </div>
                 </>
             )}
           </div>
         </div>
+
         {showModal && (
             <div className="modal-overlay" onClick={() => setShowModal(false)}>
               <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -130,8 +122,8 @@ function Project() {
                 <input
                     type="text"
                     placeholder="Ex: Refonte site web"
-                    value={newProject.title}
-                    onChange={(e) => setNewProject({ ...newProject, title: e.target.value })}
+                    value={newProject.titre}
+                    onChange={(e) => setNewProject({ ...newProject, titre: e.target.value })}
                 />
 
                 <label>Description</label>
@@ -149,11 +141,6 @@ function Project() {
         )}
       </div>
   );
-}
-
-export function ProjectDetail() {
-  const idProjet = 1; // récupère l'id depuis les params de route
-  return <Kanban idProjet={idProjet} />;
 }
 
 export default Project;
