@@ -74,31 +74,46 @@ function Dashboard() {
   return (
       <div className="db-container">
 
-        {/* SIDEBAR */}
-        <div className="db-sidebar">
-          <div className="db-logo">
-            <div className="db-logo-icon">✦</div>
-            <span>TaskFlow</span>
-          </div>
+            {/* Sidebar */}
+       <div className="sidebar">
+        <h2>TaskFlow</h2>
 
-          <nav className="db-nav">
-            <button className="db-nav-item active" onClick={() => navigate('/dashboard')}>
-              <span className="db-nav-icon">⊞</span> Dashboard
-              <span className="db-nav-dot" />
-            </button>
-            <button className="db-nav-item" onClick={() => navigate('/projects')}>
-              <span className="db-nav-icon">▦</span> Projets
-              <span className="db-nav-dot" />
-            </button>
-            <button className="db-nav-item">
-              <span className="db-nav-icon">⚙</span> Paramètres
-            </button>
-          </nav>
+        <button 
+        className="menu active"
+        <button
+          className="menu active"
+        >
+          𝄜 Dashboard
+        </button>
 
-          <button className="db-logout" onClick={handleLogout}>
-            <span>↪</span> Déconnexion
-          </button>
-        </div>
+        <button
+          className="menu"
+          onClick={() => navigate("/projects")}
+          onClick={() => navigate('/projects')}
+        >
+          🗁 Projets
+        </button>
+
+        <button 
+        className="menu"
+        <button
+          className="menu"
+        >
+        🛠 Paramètres
+          🛠 Paramètres
+        </button>
+
+        <button 
+           className="menu-logout"
+           onClick={() => navigate("/login")}
+        <button
+          className="menu-logout"
+          onClick={() => navigate('/login')}
+        >
+            Déconnexion ➜]
+          Déconnexion ➜]
+        </button>
+      </div>
 
         {/* MAIN */}
         <div className="db-main">
