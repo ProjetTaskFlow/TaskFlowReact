@@ -1,0 +1,327 @@
+/* ═══════════════════════════════════════════
+   LOGIN — TaskFlow
+   Palette : #2C3E50 (navy) · #00BFFF (sky)
+   ═══════════════════════════════════════════ */
+
+/* ── Variables ──────────────────────────────────── */
+:root {
+    --navy:       #2C3E50;
+    --navy-dark:  #1A2B3C;
+    --sky:        #00BFFF;
+    --sky-light:  #E8F4FB;
+    --sky-dark:   #009fd4;
+    --red:        #E74C3C;
+    --red-light:  #fce8e8;
+    --text:       #2C3E50;
+    --text-muted: #6B7C93;
+    --bg:         #F0F2F5;
+    --white:      #FFFFFF;
+    --border:     #DCE6F0;
+    --radius-sm:  8px;
+    --radius-md:  12px;
+    --radius-lg:  20px;
+    --shadow-card: 0 8px 40px rgba(44, 62, 80, 0.12);
+}
+
+/* ── Page ────────────────────────────────────────── */
+/* Fond clair qui prend tout l'écran
+   display: flex + place-items: center = centrage parfait
+   de la carte dans la page */
+.login-page {
+    min-height: 100vh;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+
+    /* Motif de points subtil en fond pour casser le fond uni
+    background-image: radial-gradient(var(--border) 1px, transparent 1px);
+    background-size: 28px 28px;*/
+}
+
+/* ── Carte blanche centrale ──────────────────────── */
+/* La carte contient tout le formulaire de connexion
+   animation : apparition depuis le bas au chargement */
+.login-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 420px;    /* Largeur max sur desktop */
+    animation: card-in 0.35s ease; /* Apparition animée */
+}
+
+/* Animation d'entrée : la carte monte légèrement depuis le bas */
+@keyframes card-in {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ── Brand (logo + nom) ──────────────────────────── */
+/* Ligne horizontale logo + "TaskFlow" centrée */
+.login-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+/* Cercle de fond derrière le logo SVG */
+.login-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-brand-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+}
+
+/* ── Titre et sous-titre ─────────────────────────── */
+.login-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--navy);
+    text-align: center;
+    margin: 0 0 0.4rem;
+    letter-spacing: -0.03em;
+}
+
+.login-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin: 0 0 1.75rem;
+}
+
+/* ── Message d'erreur ────────────────────────────── */
+/* S'affiche uniquement quand l'API renvoie une erreur
+   role="alert" : annoncé par les lecteurs d'écran */
+.login-error {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--red-light);
+    color: var(--red);
+    border: 1px solid #f5c6c6;
+    border-radius: var(--radius-sm);
+    padding: 0.65rem 0.875rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+    animation: shake 0.35s ease; /* Petit tremblement pour attirer l'attention */
+}
+
+/* Animation de "secousse" quand une erreur apparaît */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%       { transform: translateX(-6px); }
+    40%       { transform: translateX(6px); }
+    60%       { transform: translateX(-4px); }
+    80%       { transform: translateX(4px); }
+}
+
+/* ── Formulaire ──────────────────────────────────── */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+/* Un champ = label + input (avec icône) */
+.login-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Ligne avec le label à gauche et "Mot de passe oublié ?" à droite */
+.login-field-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.login-field label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+/* ── Wrapper de l'input ──────────────────────────── */
+/* position: relative permet de positionner les icônes
+   à l'intérieur en absolu */
+.login-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Icône à gauche de l'input (email, cadenas) */
+.login-input-icon {
+    position: absolute;
+    left: 12px;              /* Décalage depuis le bord gauche */
+    color: var(--text-muted);
+    pointer-events: none;    /* L'icône ne bloque pas les clics sur l'input */
+    flex-shrink: 0;
+}
+
+/* Champ de saisie */
+.login-input-wrap input {
+    width: 100%;
+    padding: 0.65rem 2.75rem; /* Espace pour les icônes gauche et droite */
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    color: var(--text);
+    background: var(--bg);
+    outline: none;
+    font-family: inherit;
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+
+/* Style au focus : bordure sky + anneau de focus */
+.login-input-wrap input:focus {
+    border-color: var(--sky);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.12);
+}
+
+/* Champ désactivé pendant le chargement */
+.login-input-wrap input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ── Bouton afficher/masquer mot de passe ────────── */
+/* Positionné à droite de l'input du mot de passe */
+.login-eye {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    transition: color 0.15s;
+}
+
+.login-eye:hover {
+    color: var(--navy);
+}
+
+/* ── Lien "Mot de passe oublié ?" ────────────────── */
+.login-forgot {
+    background: none;
+    border: none;
+    color: var(--sky);
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.15s;
+}
+
+.login-forgot:hover {
+    color: var(--sky-dark);
+    text-decoration: underline;
+}
+
+/* ── Bouton Se connecter ─────────────────────────── */
+.login-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: var(--sky);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 0.25rem;
+    transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
+    box-shadow: 0 2px 10px rgba(0, 191, 255, 0.35);
+}
+
+.login-btn:hover:not(:disabled) {
+    background: var(--sky-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 191, 255, 0.45);
+}
+
+.login-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+/* Bouton désactivé pendant le chargement */
+.login-btn:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+}
+
+/* ── Spinner dans le bouton ──────────────────────── */
+/* Remplace le texte pendant l'appel API */
+.login-btn-spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;  /* Un côté blanc = effet de rotation */
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Lien "Créer un compte" ──────────────────────── */
+.login-register {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 1.25rem 0 0;
+}
+
+.login-register-link {
+    background: none;
+    border: none;
+    color: var(--sky);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.15s;
+}
+
+.login-register-link:hover {
+    color: var(--sky-dark);
+    text-decoration: underline;
+}
+
+/* ── Responsive mobile ───────────────────────────── */
+@media (max-width: 480px) {
+    .login-page { padding: 1rem; }
+    .login-card { padding: 2rem 1.25rem; }
+    .login-title { font-size: 1.5rem; }
+}
