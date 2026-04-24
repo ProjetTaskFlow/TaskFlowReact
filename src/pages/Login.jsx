@@ -38,10 +38,10 @@ function Login() {
       }
 
       // Connexion réussie donc appel login() du AuthContext avec token reçu de l'API
-      login(data.token, data.utilisateur);
-
-      // Redirection vers dashboard
-      navigate("/dashboard");
+      if (res.ok) {
+        login(data.utilisateur);
+        navigate("/dashboard");
+      }
 
     } catch (error) {
       console.error("Erreur de connexion", error);
