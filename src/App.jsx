@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
@@ -11,6 +11,15 @@ import Settings from './pages/Settings.jsx';
 import KanbanDemo from './pages/KanbanDemo.jsx';
 
 function App() {
+    const { loading } = useAuth();
+
+    // Attend la vérification du cookie avant d'afficher quoi que ce soit
+    if (loading) return (
+        <div style={{ display: "flex", justifyContent: "center",
+            alignItems: "center", height: "100vh" }}>
+            <div className="kb-spinner" />
+        </div>
+    );
     return (
         <AuthProvider>
             <BrowserRouter>

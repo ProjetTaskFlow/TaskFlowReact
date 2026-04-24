@@ -74,28 +74,29 @@ function Dashboard() {
   return (
       <div className="db-container">
 
-        {/* SIDEBAR */}
-        <div className="db-sidebar">
-          <div className="db-logo">
-            <div className="db-logo-icon">✦</div>
+        {/* ── SIDEBAR ────────────────────────────────────────── */}
+        {/* Même sidebar que Settings, position: fixed dans le CSS */}
+        <div className="st-sidebar">
+          <div className="st-logo">
+            <div className="st-logo-icon">✦</div>
             <span>TaskFlow</span>
           </div>
 
-          <nav className="db-nav">
-            <button className="db-nav-item active" onClick={() => navigate('/dashboard')}>
-              <span className="db-nav-icon">⊞</span> Dashboard
-              <span className="db-nav-dot" />
+          <nav className="st-nav">
+            <button className="st-nav-item active" onClick={() => navigate("/dashboard")}>
+              <span>⊞</span> Dashboard
+              <span className="st-nav-dot" />
             </button>
-            <button className="db-nav-item" onClick={() => navigate('/projects')}>
-              <span className="db-nav-icon">▦</span> Projets
-              <span className="db-nav-dot" />
+            {/* active sur Projets car on est sur cette page */}
+            <button className="st-nav-item" onClick={() => navigate("/projects")}>
+              <span>▦</span> Projets
             </button>
-            <button className="db-nav-item" onClick={() => navigate('/settings')}>
-              <span className="db-nav-icon">⚙</span> Paramètres
+            <button className="st-nav-item" onClick={() => navigate("/settings")}>
+              <span>⚙</span> Paramètres
             </button>
           </nav>
 
-          <button className="db-logout" onClick={handleLogout}>
+          <button className="st-logout" onClick={handleLogout}>
             <span>↪</span> Déconnexion
           </button>
         </div>
